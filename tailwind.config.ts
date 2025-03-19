@@ -100,6 +100,10 @@ export default {
 				'float': {
 					'0%, 100%': { transform: 'translateY(0)' },
 					'50%': { transform: 'translateY(-5px)' }
+				},
+				'glow': {
+					'0%, 100%': { boxShadow: '0 0 10px rgba(138, 43, 226, 0.6)' },
+					'50%': { boxShadow: '0 0 20px rgba(138, 43, 226, 0.8)' }
 				}
 			},
 			animation: {
@@ -109,7 +113,8 @@ export default {
 				'fade-up': 'fade-up 0.5s ease-out',
 				'fade-down': 'fade-down 0.5s ease-out',
 				'pulse-slow': 'pulse-slow 3s infinite ease-in-out',
-				'float': 'float 3s infinite ease-in-out'
+				'float': 'float 3s infinite ease-in-out',
+				'glow': 'glow 2s infinite ease-in-out'
 			},
 			backdropFilter: {
 				'none': 'none',
