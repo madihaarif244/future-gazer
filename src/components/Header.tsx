@@ -43,7 +43,7 @@ const Header = () => {
         </nav>
 
         <div className="hidden md:flex items-center">
-          <button className="px-4 py-2 rounded-lg bg-primary text-white font-medium transition-all hover:bg-primary/90">
+          <button className="px-4 py-2 rounded-lg bg-primary text-black font-medium transition-all hover:bg-primary/90">
             Start Free Trial
           </button>
         </div>
@@ -79,7 +79,7 @@ const Header = () => {
           </MobileNavLink>
           
           <div className="pt-6">
-            <button className="w-full px-4 py-3 rounded-lg bg-primary text-white font-medium transition-all hover:bg-primary/90">
+            <button className="w-full px-4 py-3 rounded-lg bg-primary text-black font-medium transition-all hover:bg-primary/90">
               Start Free Trial
             </button>
           </div>

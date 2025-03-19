@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import SearchBar from './SearchBar';
 import PredictionChart from './PredictionChart';
+import StockMetrics from './StockMetrics';
 import { getStockData, getStockPrediction } from '@/lib/api';
 import { StockData, StockPrediction, TimeRange, PredictionPeriod } from '@/lib/types';
 import { ArrowUpIcon, ArrowDownIcon, RefreshCw } from 'lucide-react';
@@ -140,6 +141,12 @@ const StockAnalysis = () => {
             predictionPeriod={predictionPeriod}
             onTimeRangeChange={handleTimeRangeChange}
             onPredictionPeriodChange={handlePredictionPeriodChange}
+          />
+          
+          {/* New Additional Charts Section */}
+          <StockMetrics 
+            stockData={stockData}
+            isLoading={isLoadingStock}
           />
           
           {/* Disclaimer */}
