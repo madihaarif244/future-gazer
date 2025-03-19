@@ -8,7 +8,8 @@ import {
   AlphaVantageSearchResponse,
   AlphaVantageTimeSeriesResponse,
   StockSearchResult,
-  HistoricalDataPoint
+  HistoricalDataPoint,
+  PredictionDataPoint
 } from './types';
 
 // Alpha Vantage API key - Free tier with 5 calls per minute, 500 per day
