@@ -4,6 +4,7 @@ import { Search } from 'lucide-react';
 import { searchStocks } from '@/lib/api';
 import { cn } from '@/lib/utils';
 import { toast } from '@/components/ui/use-toast';
+import { Input } from '@/components/ui/input';
 
 interface SearchBarProps {
   onSelect: (symbol: string) => void;
@@ -71,6 +72,13 @@ const SearchBar = ({ onSelect, className }: SearchBarProps) => {
     setShowResults(false);
   };
 
+  // Update mock data when API fails to return results
+  const getMockResults = (query: string) => {
+    if (!query) return [];
+    const mockSymbols = ['AAPL', 'MSFT', 'GOOGL', 'AMZN', 'META', 'TSLA', 'NVDA', 'JPM', 'JNJ', 'V'];
+    return mockSymbols.filter(sym => sym.toLowerCase().includes(query.toLowerCase()));
+  };
+
   return (
     <div className={cn("relative w-full max-w-md", className)}>
       <div className="relative">
@@ -81,7 +89,7 @@ const SearchBar = ({ onSelect, className }: SearchBarProps) => {
           onChange={(e) => setQuery(e.target.value)}
           onFocus={() => query.trim() && setShowResults(true)}
           placeholder="Search stock symbols (e.g. AAPL, MSFT)"
-          className="w-full h-12 px-4 pl-10 rounded-lg border border-border bg-white bg-opacity-80 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
+          className="w-full h-12 px-4 pl-10 rounded-lg border border-border bg-white bg-opacity-80 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all text-black"
           aria-label="Search for stocks"
         />
         <Search className="absolute left-3 top-3.5 h-5 w-5 text-muted-foreground" />
@@ -107,7 +115,7 @@ const SearchBar = ({ onSelect, className }: SearchBarProps) => {
                 <li key={symbol}>
                   <button
                     onClick={() => handleSelect(symbol)}
-                    className="w-full px-4 py-2 text-left hover:bg-secondary transition-colors"
+                    className="w-full px-4 py-2 text-left hover:bg-secondary transition-colors text-black"
                   >
                     {symbol}
                   </button>
@@ -115,8 +123,24 @@ const SearchBar = ({ onSelect, className }: SearchBarProps) => {
               ))}
             </ul>
           ) : (
-            <div className="p-4 text-center text-muted-foreground">
-              {loading ? "Searching..." : "No results found"}
+            <div className="p-4 text-center text-gray-600">
+              {loading ? "Searching..." : (
+                <>
+                  <p className="mb-2">No API results found. Try these popular stocks:</p>
+                  <ul className="py-1">
+                    {getMockResults(query).map((symbol) => (
+                      <li key={symbol}>
+                        <button
+                          onClick={() => handleSelect(symbol)}
+                          className="w-full px-4 py-2 text-left hover:bg-secondary transition-colors text-black"
+                        >
+                          {symbol}
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              )}
             </div>
           )}
         </div>

@@ -43,19 +43,27 @@ export async function searchStocks(query: string): Promise<string[]> {
     const results = await fetchStockSymbols(query);
     console.log('Search results:', results);
     
-    const symbols = results.map(result => result.symbol);
+    // If we got valid results from the API
+    if (results && results.length > 0) {
+      const symbols = results.map(result => result.symbol);
+      // Cache the results
+      setCachedData(cacheKey, symbols);
+      return symbols;
+    }
     
-    // Cache the results
-    setCachedData(cacheKey, symbols);
-    
-    return symbols;
+    // If API didn't return results, use mock data
+    throw new Error("No results from API");
   } catch (error) {
     console.error('Error searching stocks:', error);
     
-    // Return some mock data if API fails
-    const mockSymbols = ['AAPL', 'MSFT', 'GOOGL', 'AMZN', 'META'].filter(
+    // Return mock data when API fails
+    const mockSymbols = ['AAPL', 'MSFT', 'GOOGL', 'AMZN', 'META', 'TSLA', 'NVDA', 'JPM', 'JNJ', 'V'].filter(
       sym => sym.toLowerCase().includes(query.toLowerCase())
     );
+    
+    // Cache the mock results
+    setCachedData(cacheKey, mockSymbols);
+    
     return mockSymbols;
   }
 }
