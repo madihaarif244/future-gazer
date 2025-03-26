@@ -25,9 +25,6 @@ const Index = () => {
               <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight text-gradient animate-fade-down">
                 Predict Market Movements <br/>with Precision
               </h1>
-              <p className="text-xl text-muted-foreground mb-10 animate-fade-up">
-                Advanced stock price prediction using machine learning models to help you make better investment decisions.
-              </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-up">
                 <Button 
                   className="button-glow hover-scale" 
