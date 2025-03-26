@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Search } from 'lucide-react';
 import { searchStocks } from '@/lib/api';
 import { cn } from '@/lib/utils';
+import { toast } from '@/components/ui/use-toast';
 
 interface SearchBarProps {
   onSelect: (symbol: string) => void;
@@ -22,11 +23,18 @@ const SearchBar = ({ onSelect, className }: SearchBarProps) => {
       if (query.trim().length > 0) {
         setLoading(true);
         try {
+          console.log("Searching for:", query);
           const data = await searchStocks(query);
+          console.log("Search results:", data);
           setResults(data);
           setShowResults(true);
         } catch (error) {
           console.error('Error searching stocks:', error);
+          toast({
+            title: "Search Error",
+            description: "Failed to search for stocks. Please try again.",
+            variant: "destructive"
+          });
         } finally {
           setLoading(false);
         }
@@ -57,6 +65,7 @@ const SearchBar = ({ onSelect, className }: SearchBarProps) => {
   }, []);
 
   const handleSelect = (symbol: string) => {
+    console.log("Selected symbol:", symbol);
     onSelect(symbol);
     setQuery(symbol);
     setShowResults(false);
@@ -87,23 +96,29 @@ const SearchBar = ({ onSelect, className }: SearchBarProps) => {
         )}
       </div>
       
-      {showResults && results.length > 0 && (
+      {showResults && (
         <div 
           ref={resultsRef}
           className="absolute z-10 w-full mt-1 max-h-60 overflow-auto rounded-lg border border-border bg-white bg-opacity-90 backdrop-blur-sm shadow-lg animate-fade-in"
         >
-          <ul className="py-1">
-            {results.map((symbol) => (
-              <li key={symbol}>
-                <button
-                  onClick={() => handleSelect(symbol)}
-                  className="w-full px-4 py-2 text-left hover:bg-secondary transition-colors"
-                >
-                  {symbol}
-                </button>
-              </li>
-            ))}
-          </ul>
+          {results.length > 0 ? (
+            <ul className="py-1">
+              {results.map((symbol) => (
+                <li key={symbol}>
+                  <button
+                    onClick={() => handleSelect(symbol)}
+                    className="w-full px-4 py-2 text-left hover:bg-secondary transition-colors"
+                  >
+                    {symbol}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <div className="p-4 text-center text-muted-foreground">
+              {loading ? "Searching..." : "No results found"}
+            </div>
+          )}
         </div>
       )}
     </div>

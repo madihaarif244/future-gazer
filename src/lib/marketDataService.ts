@@ -51,6 +51,7 @@ export async function fetchStockSymbols(query: string): Promise<StockSearchResul
 export async function fetchStockQuote(symbol: string): Promise<StockData | null> {
   try {
     const url = `${BASE_URL}?function=GLOBAL_QUOTE&symbol=${encodeURIComponent(symbol)}&apikey=${API_KEY}`;
+    console.log('Fetching stock quote:', url);
     const response = await fetch(url);
     
     if (!response.ok) {
@@ -58,6 +59,8 @@ export async function fetchStockQuote(symbol: string): Promise<StockData | null>
     }
     
     const data = await response.json() as AlphaVantageQuoteResponse;
+    console.log('Stock quote data:', data);
+    
     const quote = data['Global Quote'];
     
     if (!quote || !quote['01. symbol']) {
@@ -99,6 +102,7 @@ export async function fetchHistoricalData(symbol: string, timeRange: TimeRange):
     // For time ranges, we use the daily API endpoint with different output sizes
     const outputSize = timeRange === '5y' ? 'full' : 'compact';
     const url = `${BASE_URL}?function=TIME_SERIES_DAILY&symbol=${encodeURIComponent(symbol)}&outputsize=${outputSize}&apikey=${API_KEY}`;
+    console.log('Fetching historical data:', url);
     
     const response = await fetch(url);
     
@@ -107,6 +111,8 @@ export async function fetchHistoricalData(symbol: string, timeRange: TimeRange):
     }
     
     const data = await response.json() as AlphaVantageTimeSeriesResponse;
+    console.log('Historical data response:', data);
+    
     const timeSeries = data['Time Series (Daily)'];
     
     if (!timeSeries) {
