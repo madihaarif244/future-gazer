@@ -134,9 +134,16 @@ const PredictionChart = ({
     <div className={cn("w-full bg-white bg-opacity-70 backdrop-blur-sm rounded-xl p-4 border border-border shadow-sm", className)}>
       <div className="flex flex-col space-y-3 mb-4">
         <div className="flex justify-between items-center">
-          <h3 className="text-lg font-medium">
-            {data ? `${data.symbol} - ${data.companyName}` : 'Stock Price Chart'}
-          </h3>
+          <div>
+            <h3 className="text-lg font-medium">
+              {data ? `${data.symbol} - ${data.companyName}` : 'Stock Price Chart'}
+            </h3>
+            <div className="text-xs text-muted-foreground">
+              <span className="bg-primary/10 text-primary px-2 py-0.5 rounded-full">
+                ARIMA Model
+              </span>
+            </div>
+          </div>
           
           <div className="flex space-x-2">
             {timeOptions.map(option => (

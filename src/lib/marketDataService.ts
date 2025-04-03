@@ -1,4 +1,3 @@
-
 import { 
   StockData, 
   StockPrediction, 
@@ -11,6 +10,7 @@ import {
   HistoricalDataPoint,
   PredictionDataPoint
 } from './types';
+import { generatePredictions } from './arimaModel';
 
 // Alpha Vantage API key - Free tier with 5 calls per minute, 500 per day
 // In a real app, you would store this in environment variables

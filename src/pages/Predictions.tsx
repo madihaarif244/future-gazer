@@ -13,6 +13,9 @@ const Predictions = () => {
           <section className="py-16 mb-12">
             <div className="text-center max-w-3xl mx-auto mb-16">
               <h1 className="text-5xl font-bold mb-6 text-gradient">Predictions</h1>
+              <p className="text-lg text-muted-foreground">
+                Powered by ARIMA (AutoRegressive Integrated Moving Average) models for enhanced statistical accuracy
+              </p>
             </div>
             
             <div className="glass rounded-xl p-8">

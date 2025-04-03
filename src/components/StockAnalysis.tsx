@@ -70,7 +70,7 @@ const StockAnalysis = () => {
           Stock Analysis & Prediction
         </h2>
         <p className="text-muted-foreground mb-8 max-w-2xl mx-auto animate-fade-up">
-          Enter a stock symbol to view historical data and AI-powered price predictions
+          Enter a stock symbol to view historical data and AI-powered price predictions using ARIMA statistical modeling
         </p>
         <SearchBar onSelect={handleSelectStock} className="mx-auto animate-fade-in" />
       </div>
