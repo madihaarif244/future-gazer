@@ -16,45 +16,45 @@ const Footer = () => {
               AI-powered stock analysis and predictive insights for investors.
             </p>
             <div className="flex space-x-4 pt-2">
-              <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
+              <ExternalLink href="https://github.com" ariaLabel="GitHub">
                 <Github className="h-5 w-5" />
-              </a>
-              <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
+              </ExternalLink>
+              <ExternalLink href="https://twitter.com" ariaLabel="Twitter">
                 <Twitter className="h-5 w-5" />
-              </a>
-              <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
+              </ExternalLink>
+              <ExternalLink href="https://linkedin.com" ariaLabel="LinkedIn">
                 <Linkedin className="h-5 w-5" />
-              </a>
+              </ExternalLink>
             </div>
           </div>
           
           <div>
             <h3 className="font-medium mb-4">Features</h3>
             <ul className="space-y-2">
-              <FooterLink to="/dashboard">Stock Analysis</FooterLink>
-              <FooterLink to="/predictions">Price Predictions</FooterLink>
-              <FooterLink to="/analysis">Market Trends</FooterLink>
-              <FooterLink to="/dashboard">Portfolio Manager</FooterLink>
+              <FooterLink to="/stock-analysis">Stock Analysis</FooterLink>
+              <FooterLink to="/price-predictions">Price Predictions</FooterLink>
+              <FooterLink to="/market-trends">Market Trends</FooterLink>
+              <FooterLink to="/portfolio-manager">Portfolio Manager</FooterLink>
             </ul>
           </div>
           
           <div>
             <h3 className="font-medium mb-4">Resources</h3>
             <ul className="space-y-2">
-              <FooterLink to="#">Documentation</FooterLink>
-              <FooterLink to="#">API Reference</FooterLink>
-              <FooterLink to="#">Blog</FooterLink>
-              <FooterLink to="#">Community</FooterLink>
+              <FooterLink to="/documentation">Documentation</FooterLink>
+              <FooterLink to="/api-reference">API Reference</FooterLink>
+              <FooterLink to="/blog">Blog</FooterLink>
+              <FooterLink to="/community">Community</FooterLink>
             </ul>
           </div>
           
           <div>
             <h3 className="font-medium mb-4">Company</h3>
             <ul className="space-y-2">
-              <FooterLink to="#">About Us</FooterLink>
-              <FooterLink to="#">Careers</FooterLink>
-              <FooterLink to="#">Contact</FooterLink>
-              <FooterLink to="#">Press</FooterLink>
+              <FooterLink to="/about-us">About Us</FooterLink>
+              <FooterLink to="/careers">Careers</FooterLink>
+              <FooterLink to="/contact">Contact</FooterLink>
+              <FooterLink to="/press">Press</FooterLink>
             </ul>
           </div>
         </div>
@@ -64,15 +64,15 @@ const Footer = () => {
             © {new Date().getFullYear()} StockPredict. All rights reserved.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
-            <a href="#" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
+            <FooterLink to="/privacy-policy" className="text-xs">
               Privacy Policy
-            </a>
-            <a href="#" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
+            </FooterLink>
+            <FooterLink to="/terms-of-service" className="text-xs">
               Terms of Service
-            </a>
-            <a href="#" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
+            </FooterLink>
+            <FooterLink to="/cookies-policy" className="text-xs">
               Cookies Policy
-            </a>
+            </FooterLink>
           </div>
         </div>
       </div>
@@ -80,12 +80,24 @@ const Footer = () => {
   );
 };
 
-const FooterLink = ({ to, children }: { to: string; children: React.ReactNode }) => (
+const FooterLink = ({ to, children, className = "" }: { to: string; children: React.ReactNode; className?: string }) => (
   <li>
-    <Link to={to} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+    <Link to={to} className={`text-sm text-muted-foreground hover:text-foreground transition-colors ${className}`}>
       {children}
     </Link>
   </li>
+);
+
+const ExternalLink = ({ href, children, ariaLabel }: { href: string; children: React.ReactNode; ariaLabel: string }) => (
+  <a 
+    href={href} 
+    target="_blank" 
+    rel="noopener noreferrer" 
+    aria-label={ariaLabel}
+    className="text-muted-foreground hover:text-primary transition-colors"
+  >
+    {children}
+  </a>
 );
 
 export default Footer;
