@@ -1,4 +1,5 @@
 
+import { Link } from 'react-router-dom';
 import { TrendingUp, Github, Twitter, Linkedin } from 'lucide-react';
 
 const Footer = () => {
@@ -7,10 +8,10 @@ const Footer = () => {
       <div className="max-w-6xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="space-y-4">
-            <div className="flex items-center">
+            <Link to="/" className="flex items-center">
               <TrendingUp className="h-6 w-6 mr-2" />
               <span className="font-bold text-xl">StockPredict</span>
-            </div>
+            </Link>
             <p className="text-sm text-muted-foreground">
               AI-powered stock analysis and predictive insights for investors.
             </p>
@@ -30,30 +31,30 @@ const Footer = () => {
           <div>
             <h3 className="font-medium mb-4">Features</h3>
             <ul className="space-y-2">
-              <FooterLink>Stock Analysis</FooterLink>
-              <FooterLink>Price Predictions</FooterLink>
-              <FooterLink>Market Trends</FooterLink>
-              <FooterLink>Portfolio Manager</FooterLink>
+              <FooterLink to="/dashboard">Stock Analysis</FooterLink>
+              <FooterLink to="/predictions">Price Predictions</FooterLink>
+              <FooterLink to="/analysis">Market Trends</FooterLink>
+              <FooterLink to="/dashboard">Portfolio Manager</FooterLink>
             </ul>
           </div>
           
           <div>
             <h3 className="font-medium mb-4">Resources</h3>
             <ul className="space-y-2">
-              <FooterLink>Documentation</FooterLink>
-              <FooterLink>API Reference</FooterLink>
-              <FooterLink>Blog</FooterLink>
-              <FooterLink>Community</FooterLink>
+              <FooterLink to="#">Documentation</FooterLink>
+              <FooterLink to="#">API Reference</FooterLink>
+              <FooterLink to="#">Blog</FooterLink>
+              <FooterLink to="#">Community</FooterLink>
             </ul>
           </div>
           
           <div>
             <h3 className="font-medium mb-4">Company</h3>
             <ul className="space-y-2">
-              <FooterLink>About Us</FooterLink>
-              <FooterLink>Careers</FooterLink>
-              <FooterLink>Contact</FooterLink>
-              <FooterLink>Press</FooterLink>
+              <FooterLink to="#">About Us</FooterLink>
+              <FooterLink to="#">Careers</FooterLink>
+              <FooterLink to="#">Contact</FooterLink>
+              <FooterLink to="#">Press</FooterLink>
             </ul>
           </div>
         </div>
@@ -79,11 +80,11 @@ const Footer = () => {
   );
 };
 
-const FooterLink = ({ children }: { children: React.ReactNode }) => (
+const FooterLink = ({ to, children }: { to: string; children: React.ReactNode }) => (
   <li>
-    <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+    <Link to={to} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
       {children}
-    </a>
+    </Link>
   </li>
 );
 

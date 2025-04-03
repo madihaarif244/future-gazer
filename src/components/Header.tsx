@@ -1,5 +1,6 @@
 
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { BarChart3, TrendingUp, PieChart, Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -26,18 +27,20 @@ const Header = () => {
     )}>
       <div className="max-w-6xl mx-auto flex justify-between items-center">
         <div className="flex items-center">
-          <TrendingUp className="h-6 w-6 mr-2" />
-          <span className="font-bold text-xl">StockPredict</span>
+          <Link to="/" className="flex items-center">
+            <TrendingUp className="h-6 w-6 mr-2" />
+            <span className="font-bold text-xl">StockPredict</span>
+          </Link>
         </div>
 
         <nav className="hidden md:flex items-center space-x-8">
-          <NavLink href="#" icon={<BarChart3 className="h-4 w-4 mr-2" />}>
+          <NavLink to="/dashboard" icon={<BarChart3 className="h-4 w-4 mr-2" />}>
             Dashboard
           </NavLink>
-          <NavLink href="#" icon={<TrendingUp className="h-4 w-4 mr-2" />}>
+          <NavLink to="/predictions" icon={<TrendingUp className="h-4 w-4 mr-2" />}>
             Predictions
           </NavLink>
-          <NavLink href="#" icon={<PieChart className="h-4 w-4 mr-2" />}>
+          <NavLink to="/analysis" icon={<PieChart className="h-4 w-4 mr-2" />}>
             Analysis
           </NavLink>
         </nav>
@@ -68,13 +71,13 @@ const Header = () => {
           : "translate-x-full opacity-0 pointer-events-none"
       )}>
         <div className="pt-20 px-6 space-y-6">
-          <MobileNavLink href="#" icon={<BarChart3 className="h-5 w-5 mr-3" />}>
+          <MobileNavLink to="/dashboard" icon={<BarChart3 className="h-5 w-5 mr-3" />}>
             Dashboard
           </MobileNavLink>
-          <MobileNavLink href="#" icon={<TrendingUp className="h-5 w-5 mr-3" />}>
+          <MobileNavLink to="/predictions" icon={<TrendingUp className="h-5 w-5 mr-3" />}>
             Predictions
           </MobileNavLink>
-          <MobileNavLink href="#" icon={<PieChart className="h-5 w-5 mr-3" />}>
+          <MobileNavLink to="/analysis" icon={<PieChart className="h-5 w-5 mr-3" />}>
             Analysis
           </MobileNavLink>
           
@@ -90,39 +93,39 @@ const Header = () => {
 };
 
 const NavLink = ({ 
-  href, 
+  to, 
   children, 
   icon 
 }: { 
-  href: string; 
+  to: string; 
   children: React.ReactNode; 
   icon?: React.ReactNode;
 }) => (
-  <a 
-    href={href} 
+  <Link 
+    to={to} 
     className="flex items-center text-sm font-medium text-foreground hover:text-primary transition-colors"
   >
     {icon}
     {children}
-  </a>
+  </Link>
 );
 
 const MobileNavLink = ({ 
-  href, 
+  to, 
   children, 
   icon 
 }: { 
-  href: string; 
+  to: string; 
   children: React.ReactNode; 
   icon?: React.ReactNode;
 }) => (
-  <a 
-    href={href} 
+  <Link 
+    to={to} 
     className="flex items-center text-lg py-3 border-b border-border text-foreground"
   >
     {icon}
     {children}
-  </a>
+  </Link>
 );
 
 export default Header;
