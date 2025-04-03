@@ -1,3 +1,4 @@
+
 import { 
   StockData, 
   StockPrediction, 
@@ -10,7 +11,7 @@ import {
   HistoricalDataPoint,
   PredictionDataPoint
 } from './types';
-import { generatePredictions } from './arimaModel';
+import { generatePredictions as generateARIMAPredictions } from './arimaModel';
 
 // Alpha Vantage API key - Free tier with 5 calls per minute, 500 per day
 // In a real app, you would store this in environment variables
@@ -167,7 +168,7 @@ export async function fetchHistoricalData(symbol: string, timeRange: TimeRange):
 
 // Generate AI predictions based on historical data
 // Note: In a real app, this would be done by a proper machine learning model
-export function generatePredictions(
+export function generateSimplePredictions(
   historicalData: HistoricalDataPoint[],
   predictionPeriod: PredictionPeriod
 ): PredictionDataPoint[] {
@@ -222,4 +223,13 @@ export function generatePredictions(
   }
   
   return predictions;
+}
+
+// Use the ARIMA model for our main prediction function
+export function generatePredictions(
+  historicalData: HistoricalDataPoint[],
+  predictionPeriod: PredictionPeriod
+): PredictionDataPoint[] {
+  // Use the ARIMA model for predictions
+  return generateARIMAPredictions(historicalData, predictionPeriod);
 }
